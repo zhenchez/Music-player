@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZC Music</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/playlist.css" />
+    <link rel="stylesheet" href="./styles/main-songs.css" />
+    <script src="
+  https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="left-section">
+        <header class="header">
+          <div class="header-logo">
+            <h1 class="logo-text">ZC Music</h1>
+          </div>
+
+          <div class="header-links">
+            <a href="" class="links"
+              ><img class="icons" src="./icons/home.svg" />Home</a
+            >
+            <a href="" class="links"
+              ><img class="icons" src="./icons/hot.svg" />Trending</a
+            >
+          </div>
+        </header>
+        <section class="playlist">
+          <div class="playlist-header">
+            <a href="" class="links"
+              ><img src="./icons/playlist.svg" class="icons" />PlayList</a
+            >
+          </div>
+
+          <div class="playlist-songs-container">
+            <div class="playlist-song">
+              <div class="playlist-img-container">
+                <img
+                  class="playlist-thumbnail"
+                  src="./img/thumbnails/17.jfif"
+                />
+              </div>
+
+              <div class="playlist-song-details">
+                <p class="playlist-song-title">The Explanation</p>
+                <p class="playlist-song-artist">XXXTENTACION</p>
+              </div>
+              <div class="playlist-play-btt-container">
+                <button class="playlist-play-btt">
+                  <img class="playlist-play-icon" src="./icons/play.svg" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="right-section">
+        <div class="main-songs-header">
+          <h1>Songs</h1>
+        </div>
+
+        <div class="main-songs-grid">
+          <div class="main-songs-song">
+            <div class="main-thumbnail-container">
+              <img class="main-thumbnail-img" src="./img/thumbnails/17.jfif" />
+              <button class="main-song-play-btt">
+                <img src="./icons/play.svg" />
+              </button>
+            </div>
+
+            <div class="main-song-details">
+              <p class="main-song-title">The Explanation</p>
+              <p class="main-song-artist">XXXTENTACION</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./scripts/main.js"></script>
+  </body>
+</html>

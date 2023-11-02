@@ -1,0 +1,17 @@
+.main-songs-header {
+  margin: 4px;
+}
+.main-songs-grid {
+  display: grid;
+}
+.main-songs-song {
+  background-color: blueviolet;
+}
+.main-thumbnail-container {
+  width: 120px;
+  height: 120px;
+}
+.main-thumbnail-img {
+  width: 120px;
+  height: 120px;
+}

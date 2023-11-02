@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+:root {
+  --background: rgb(0, 0, 0, 1);
+  --container-bg: rgba(18, 18, 18, 0.5);
+  --songs-bg: rgba(18, 18, 18, 0.5);
+  --links: rgba(200, 200, 200, 1);
+  --btt-color: rgba(0, 176, 191, 1);
+}
+html {
+  background-color: var(--background);
+}
+
+* {
+  margin: 0;
+  font-family: Arial;
+  text-decoration: none;
+  color: white;
+}
+
+button {
+  cursor: pointer;
+}
+
+.main-container {
+  display: flex;
+}
+.left-section {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+.right-section {
+  padding-left: 310px;
+}
