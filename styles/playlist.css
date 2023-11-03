@@ -1,5 +1,6 @@
 .playlist {
   flex: 1;
+  margin-top: 4px;
 }
 .playlist-songs-container {
   margin: 10px 0;
@@ -15,13 +16,13 @@
   cursor: pointer;
 }
 .playlist-thumbnail {
-  width: 40px;
+  width: 100%;
 }
 .playlist-song-details {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 150px;
+  width: 160px;
   margin-right: 6px;
 }
 .playlist-song-title {
@@ -31,6 +32,7 @@
 .playlist-song-artist {
   font-size: 10px;
   cursor: pointer;
+  color: var(--details);
 }
 .playlist-play-btt-container {
   display: flex;

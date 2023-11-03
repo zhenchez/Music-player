@@ -2,10 +2,13 @@
 .playlist {
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  margin: 4px;
+  padding: 18px 24px;
+  margin: 8px;
   background-color: var(--container-bg);
   border-radius: 8px;
+}
+.header {
+  margin-bottom: 4px;
 }
 .header-logo {
   font-size: 16px;

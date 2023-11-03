@@ -1,0 +1,33 @@
+.player-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 8px;
+  left: 310px;
+  right: 0;
+  padding: 20px;
+  background-color: var(--container-bg);
+  border-radius: 8px;
+}
+.player-left-section {
+  display: flex;
+  align-items: center;
+}
+.player-song-thumbnail {
+  width: 60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.player-song-img {
+  width: 100%;
+}
+.player-song-details {
+  margin-left: 10px;
+}
+.player-song-title {
+  margin-bottom: 10px;
+}
+.player-song-artist {
+  color: var(--details);
+  font-size: 12px;
+}

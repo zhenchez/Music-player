@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/header.css" />
     <link rel="stylesheet" href="./styles/playlist.css" />
     <link rel="stylesheet" href="./styles/main-songs.css" />
+    <link rel="stylesheet" href="./styles/player.css" />
     <script src="
   https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
   </head>
@@ -35,45 +36,44 @@
             >
           </div>
 
-          <div class="playlist-songs-container">
-            <div class="playlist-song">
-              <div class="playlist-img-container">
-                <img
-                  class="playlist-thumbnail"
-                  src="./img/thumbnails/17.jfif"
-                />
-              </div>
-
-              <div class="playlist-song-details">
-                <p class="playlist-song-title">The Explanation</p>
-                <p class="playlist-song-artist">XXXTENTACION</p>
-              </div>
-              <div class="playlist-play-btt-container">
-                <button class="playlist-play-btt">
-                  <img class="playlist-play-icon" src="./icons/play.svg" />
-                </button>
-              </div>
-            </div>
-          </div>
+          <div class="playlist-songs-container"></div>
         </section>
       </div>
+
       <div class="right-section">
-        <div class="main-songs-header">
-          <h1>Songs</h1>
+        <div class="main-songs">
+          <div class="main-songs-header">
+            <h1>Songs</h1>
+          </div>
+
+          <div class="main-songs-grid"></div>
         </div>
 
-        <div class="main-songs-grid">
-          <div class="main-songs-song">
-            <div class="main-thumbnail-container">
-              <img class="main-thumbnail-img" src="./img/thumbnails/17.jfif" />
-              <button class="main-song-play-btt">
-                <img src="./icons/play.svg" />
-              </button>
+        <div class="player-container">
+          <div class="player-left-section">
+            <div class="player-song-thumbnail">
+              <img class="player-song-img" src="./img/thumbnails/17.jfif" />
             </div>
+            <div class="player-song-details">
+              <p class="player-song-title">The Explanation</p>
+              <p class="player-song-artist">XXXTENTACION</p>
+            </div>
+          </div>
 
-            <div class="main-song-details">
-              <p class="main-song-title">The Explanation</p>
-              <p class="main-song-artist">XXXTENTACION</p>
+          <div class="player-middle-section">
+            <div class="player-btts">
+              <button class="back-btt">back</button>
+              <button class="pause-btt">pause</button>
+              <button class="next-btt">next</button>
+            </div>
+            <div class="song-duration">
+              <input type="range" />
+            </div>
+          </div>
+
+          <div class="player-right-section">
+            <div class="volume">
+              <input type="range" />
             </div>
           </div>
         </div>
