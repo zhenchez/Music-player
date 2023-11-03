@@ -23,14 +23,19 @@
   flex-direction: column;
   justify-content: space-between;
   width: 160px;
-  margin-right: 6px;
+  margin-right: 16px;
 }
 .playlist-song-title {
   font-size: 16px;
   cursor: pointer;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  cursor: pointer;
 }
 .playlist-song-artist {
-  font-size: 10px;
+  font-size: 12px;
   cursor: pointer;
   color: var(--details);
 }
@@ -42,7 +47,7 @@
 .playlist-play-btt {
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
   background-color: var(--btt-color);
   height: 35px;
   width: 35px;
@@ -55,6 +60,4 @@
 }
 .playlist-play-icon {
   width: 26px;
-  position: absolute;
-  left: 6px;
 }
