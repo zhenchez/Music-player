@@ -1,5 +1,7 @@
 import { songs } from "./data/songs.js";
 
+let soundMap = {};
+
 function generatePlaylistSongs() {
   const playlistDOM = document.querySelector(".playlist-songs-container");
   let playlistHTML = "";
@@ -56,6 +58,45 @@ function generateMainSongs() {
     songsDOM.innerHTML = mainSongsHTML;
   });
 }
+function generatePlayer(song) {
+  const playerDOM = document.querySelector(".player-container");
+  let bodyHTML = `
+    <div class="player-left-section">
+      <div class="player-song-thumbnail">
+        <img class="player-song-img" src=${song.img} />
+      </div>
+      <div class="player-song-details">
+        <p class="player-song-title">${song.title}</p>
+        <p class="player-song-artist">${song.artist}</p>
+      </div>
+    </div>
+
+    <div class="player-middle-section">
+      <div class="player-btts">
+        <button class="player-btt back-btt">
+          <img src="./icons/back.svg" class="player-icon" />
+        </button>
+        <button class="player-btt pause-btt">
+          <img src="./icons/play_arrow.svg" class="player-icon" />
+        </button>
+        <button class="player-btt next-btt">
+          <img src="./icons/next.svg" class="player-icon" />
+        </button>
+      </div>
+      <div class="song-duration">
+        <input class="song-duration-range" type="range" />
+      </div>
+    </div>
+
+    <div class="player-right-section">
+      <img src="./icons/volume.svg" />
+      <div class="volume">
+        <input class="volume-range" type="range" />
+      </div>
+    </div>
+  `;
+  playerDOM.innerHTML = bodyHTML;
+}
 
 generateMainSongs();
 generatePlaylistSongs();
@@ -71,16 +112,32 @@ document.querySelectorAll(".play-btt").forEach(button => {
       }
     });
 
-    if (matchingSong) {
-      let sound = new Howl({
-        src: matchingSong.src,
-        volume: 0.5,
-      });
-      if (sound.playing()) {
-        sound.stop();
+    if (soundMap[songId]) {
+      // If the sound for this song already exists, check if it's playing
+      if (soundMap[songId].playing()) {
+        console.log("pause");
+        soundMap[songId].pause();
       } else {
-        sound.play();
+        console.log("resume");
+        soundMap[songId].play();
+      }
+    } else {
+      // If the sound for this song doesn't exist, create it and play it
+      songs.forEach(song => {
+        if (song.id === songId) {
+          soundMap[songId] = new Howl({
+            src: song.src,
+            volume: 0.5,
+          });
+        }
+      });
+
+      if (soundMap[songId]) {
+        console.log("play");
+        soundMap[songId].play();
       }
     }
+    generatePlayer(matchingSong);
+    console.log(soundMap);
   });
 });
