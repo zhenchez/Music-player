@@ -1,6 +1,10 @@
 import { songs } from "./data/songs.js";
 
 let soundMap = {};
+let matchingSong;
+let currentSongId = null;
+let currentVolume;
+let timeInterval;
 
 function generatePlaylistSongs() {
   const playlistDOM = document.querySelector(".playlist-songs-container");
@@ -43,8 +47,8 @@ function generateMainSongs() {
                     class="main-thumbnail-img"
                     src=${song.img}
                   />
-                  <button class="main-song-play-btt play-btt" data-song-id="${song.id}">
-                    <img class="main-song-play-icon" src="./icons/play_arrow.svg" />
+                  <button class="main-song-play-btt play-btt main-play-btt-${song.id}" data-song-id="${song.id}">
+                    <img class="main-song-play-icon main-play-icon-${song.id}" src="./icons/play_arrow.svg" />
                   </button>
                 </div>
   
@@ -59,52 +63,47 @@ function generateMainSongs() {
   });
 }
 function generatePlayer(song) {
-  const playerDOM = document.querySelector(".player-container");
+  const playerRightDOM = document.querySelector(".player-left-section");
+  const playerMiddleDOM = document.querySelector(".player-middle-section");
   let bodyHTML = `
-    <div class="player-left-section">
-      <div class="player-song-thumbnail">
-        <img class="player-song-img" src=${song.img} />
-      </div>
-      <div class="player-song-details">
-        <p class="player-song-title">${song.title}</p>
-        <p class="player-song-artist">${song.artist}</p>
-      </div>
+    <div class="player-song-thumbnail">
+      <img class="player-song-img" src=${song.img} />
     </div>
-
-    <div class="player-middle-section">
-      <div class="player-btts">
-        <button class="player-btt back-btt">
-          <img src="./icons/back.svg" class="player-icon" />
-        </button>
-        <button class="player-btt pause-btt">
-          <img src="./icons/play_arrow.svg" class="player-icon" />
-        </button>
-        <button class="player-btt next-btt">
-          <img src="./icons/next.svg" class="player-icon" />
-        </button>
-      </div>
-      <div class="song-duration">
-        <input class="song-duration-range" type="range" />
-      </div>
-    </div>
-
-    <div class="player-right-section">
-      <img src="./icons/volume.svg" />
-      <div class="volume">
-        <input class="volume-range" type="range" />
-      </div>
+    <div class="player-song-details">
+      <p class="player-song-title">${song.title}</p>
+      <p class="player-song-artist">${song.artist}</p>
     </div>
   `;
-  playerDOM.innerHTML = bodyHTML;
+  playerRightDOM.innerHTML = bodyHTML;
+
+  bodyHTML = `
+    <div class="player-btts">
+      <button class="player-btt back-btt">
+        <img src="./icons/back.svg" class="back-icon player-icon" />
+      </button>
+      <button class="player-btt pause-btt">
+        <img src="./icons/pause.svg" class="pause-icon player-icon" />
+      </button>
+      <button class="player-btt next-btt">
+        <img src="./icons/next.svg" class="next-icon player-icon" />
+      </button>
+    </div>
+    <div class="song-duration">
+      <input class="song-duration-range" type="range" value="0" step="0.01"/>
+    </div>
+  `;
+  playerMiddleDOM.innerHTML = bodyHTML;
 }
 
 generateMainSongs();
-generatePlaylistSongs();
+/* generatePlaylistSongs(); */
 
-let matchingSong;
 document.querySelectorAll(".play-btt").forEach(button => {
   button.addEventListener("click", () => {
     const { songId } = button.dataset;
+    const volumeDOM = document.querySelector(".volume-range");
+    let volume = parseFloat(volumeDOM.value);
+    currentVolume = volume;
 
     songs.forEach(song => {
       if (song.id === songId) {
@@ -112,32 +111,68 @@ document.querySelectorAll(".play-btt").forEach(button => {
       }
     });
 
-    if (soundMap[songId]) {
-      // If the sound for this song already exists, check if it's playing
+    if (timeInterval) {
+      clearInterval(timeInterval);
+    }
+
+    generatePlayer(matchingSong);
+
+    document.querySelector(".pause-btt").addEventListener("click", () => {
+      const pauseDOM = document.querySelector(".pause-icon");
       if (soundMap[songId].playing()) {
-        console.log("pause");
+        soundMap[songId].pause();
+        pauseDOM.src = "../icons/play_arrow.svg";
+      } else {
+        soundMap[songId].play();
+        pauseDOM.src = "../icons/pause.svg";
+      }
+    });
+
+    document.querySelector(".volume-range").addEventListener("input", () => {
+      volume = parseFloat(volumeDOM.value);
+      soundMap[currentSongId].volume(volume);
+      currentVolume = volume;
+      for (const songId in soundMap) {
+        soundMap[songId].volume(currentVolume);
+      }
+    });
+
+    if (currentSongId && currentSongId !== songId) {
+      if (soundMap[currentSongId].playing()) {
+        soundMap[currentSongId].pause();
+      }
+    }
+
+    if (soundMap[songId]) {
+      if (soundMap[songId].playing()) {
         soundMap[songId].pause();
       } else {
-        console.log("resume");
         soundMap[songId].play();
       }
     } else {
-      // If the sound for this song doesn't exist, create it and play it
       songs.forEach(song => {
         if (song.id === songId) {
           soundMap[songId] = new Howl({
             src: song.src,
-            volume: 0.5,
+            volume: currentVolume,
           });
         }
       });
 
       if (soundMap[songId]) {
-        console.log("play");
         soundMap[songId].play();
       }
     }
-    generatePlayer(matchingSong);
-    console.log(soundMap);
+    const duration = document.querySelector(".song-duration-range");
+
+    duration.addEventListener("input", () => {
+      soundMap[songId].seek(duration.value);
+    });
+
+    timeInterval = setInterval(() => {
+      duration.value = String(soundMap[songId].seek());
+      duration.setAttribute("max", `${String(soundMap[songId].duration())}`);
+    }, 300);
+    currentSongId = songId;
   });
 });
