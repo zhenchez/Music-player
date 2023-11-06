@@ -62,4 +62,11 @@ export let songs = [
     title: "Je t'aime de ouf",
     artist: "Poum Tica",
   },
+  {
+    id: "3isd-5dsafg",
+    src: "../music/Mr.-Kill-Myself.mp3",
+    img: "https://i.scdn.co/image/ab67706c0000da84b87d727999c4d06a161bcf46",
+    title: "Mr. Kill Myself",
+    artist: "Sewerslvt",
+  },
 ];
