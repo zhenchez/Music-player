@@ -5,6 +5,7 @@ let matchingSong;
 let currentSongId = null;
 let currentVolume;
 let timeInterval;
+let currentIndex = 0;
 
 function generatePlaylistSongs() {
   const playlistDOM = document.querySelector(".playlist-songs-container");
@@ -96,7 +97,9 @@ function generatePlayer(song) {
 }
 
 generateMainSongs();
-/* generatePlaylistSongs(); */
+generatePlaylistSongs();
+
+
 
 document.querySelectorAll(".play-btt").forEach(button => {
   button.addEventListener("click", () => {
@@ -116,6 +119,24 @@ document.querySelectorAll(".play-btt").forEach(button => {
     }
 
     generatePlayer(matchingSong);
+
+    const nextBttDOM = document.querySelector('.next-btt');
+    const backBttDOM = document.querySelector('.back-btt');
+
+    nextBttDOM.addEventListener('click', () => {
+      if (currentIndex !== soundMap.length - 1) {
+        soundMap[currentSongId].pause();
+        console.log(soundMap[2]);
+        songIdPlay.play();
+      }
+    })
+    backBttDOM.addEventListener('click', () => {
+      if (currentIndex !== -1) {
+        soundMap[currentSongId].pause();
+        console.log(soundMap[2]);
+        songIdPlay.play();
+      }
+    })
 
     document.querySelector(".pause-btt").addEventListener("click", () => {
       const pauseDOM = document.querySelector(".pause-icon");
@@ -176,3 +197,4 @@ document.querySelectorAll(".play-btt").forEach(button => {
     currentSongId = songId;
   });
 });
+
