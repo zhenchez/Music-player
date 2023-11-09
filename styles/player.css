@@ -75,6 +75,7 @@
 }
 .song-duration-range {
   width: 100%;
+  margin: 0 10px;
 }
 .song-duration-range::-webkit-slider-runnable-track {
   background-color: #053a5f;
@@ -93,4 +94,8 @@
 .volume-range::-webkit-slider-runnable-track {
   background-color: #053a5f;
   border-radius: 0.5rem;
+}
+.current-time,
+.song-time {
+  letter-spacing: 1px;
 }

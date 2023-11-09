@@ -207,6 +207,13 @@ function playNewSong(newSong) {
     playNewSong(nextSong);
   });
 }
+function formatDuration(s) {
+  const minutes = Math.floor(s / 60);
+  const seconds = Math.floor(s % 60);
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
 function addDuration(songId) {
   const duration = document.querySelector(".song-duration-range");
   const time = document.querySelector(".current-time");
@@ -218,11 +225,9 @@ function addDuration(songId) {
 
   timeInterval = setInterval(() => {
     duration.value = String(soundMap[songId].seek());
-    time.innerHTML = Math.round(soundMap[songId].seek() / 60).toFixed(2);
+    time.innerHTML = formatDuration(soundMap[songId].seek());
     duration.setAttribute("max", `${String(soundMap[songId].duration())}`);
-    songTime.innerHTML = (Math.round(soundMap[songId].duration()) / 60).toFixed(
-      2
-    );
+    songTime.innerHTML = formatDuration(soundMap[songId].duration());
   }, 300);
 }
 function changeAllSongVolume() {
