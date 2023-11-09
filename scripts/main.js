@@ -1,11 +1,9 @@
 import { songs } from "./data/songs.js";
 
-let soundMap = {};
-let matchingSong;
+let soundMap = [];
 let currentSongId = null;
 let currentVolume;
 let timeInterval;
-let currentIndex = 0;
 
 function generatePlaylistSongs() {
   const playlistDOM = document.querySelector(".playlist-songs-container");
@@ -43,21 +41,21 @@ function generateMainSongs() {
     let bodyHTML = "";
     bodyHTML = `
     <div class="main-songs-song">
-                <div class="main-thumbnail-container">
-                  <img
-                    class="main-thumbnail-img"
-                    src=${song.img}
-                  />
-                  <button class="main-song-play-btt play-btt main-play-btt-${song.id}" data-song-id="${song.id}">
-                    <img class="main-song-play-icon main-play-icon-${song.id}" src="./icons/play_arrow.svg" />
-                  </button>
-                </div>
-  
-                <div class="main-song-details">
-                  <p class="main-song-title">${song.title}</p>
-                  <p class="main-song-artist">${song.artist}</p>
-                </div>
-              </div>
+      <div class="main-thumbnail-container">
+        <img
+          class="main-thumbnail-img"
+          src=${song.img}
+        />
+        <button class="main-song-play-btt play-btt main-play-btt-${song.id}" data-song-id="${song.id}">
+          <img class="main-song-play-icon main-play-icon-${song.id}" src="./icons/play_arrow.svg" />
+        </button>
+      </div>
+
+      <div class="main-song-details">
+        <p class="main-song-title">${song.title}</p>
+        <p class="main-song-artist">${song.artist}</p>
+      </div>
+    </div>
     `;
     mainSongsHTML += bodyHTML;
     songsDOM.innerHTML = mainSongsHTML;
@@ -90,111 +88,157 @@ function generatePlayer(song) {
       </button>
     </div>
     <div class="song-duration">
+      <div class="current-time"></div>
       <input class="song-duration-range" type="range" value="0" step="0.01"/>
+      <div class="song-time"></div>
     </div>
   `;
   playerMiddleDOM.innerHTML = bodyHTML;
+
+  addPreviousNextListener();
+}
+function loadAllSongs() {
+  songs.forEach(song => {
+    soundMap[song.id] = new Howl({
+      src: song.src,
+      volume: 0.5,
+    });
+  });
+}
+function addPreviousNextListener() {
+  document.querySelector(".back-btt").addEventListener("click", () => {
+    const currentIndex = songs.findIndex(song => song.id === currentSongId);
+    const previousIndex = (currentIndex - 1 + songs.length) % songs.length;
+    const previousSong = songs[previousIndex];
+    playNewSong(previousSong);
+  });
+
+  document.querySelector(".next-btt").addEventListener("click", () => {
+    const currentIndex = songs.findIndex(song => song.id === currentSongId);
+    const nextIndex = (currentIndex + 1) % songs.length;
+    const nextSong = songs[nextIndex];
+    playNewSong(nextSong);
+  });
+}
+function addPlayerEventListeners(songId) {
+  document.querySelector(".pause-btt").addEventListener("click", () => {
+    const pauseDOM = document.querySelector(".pause-icon");
+    if (soundMap[songId].playing()) {
+      soundMap[songId].pause();
+      pauseDOM.src = "../icons/play_arrow.svg";
+    } else {
+      soundMap[songId].play();
+      pauseDOM.src = "../icons/pause.svg";
+    }
+  });
+}
+function selectMatchingSong(songId) {
+  let matchingSong;
+  songs.forEach(song => {
+    if (song.id === songId) {
+      matchingSong = song;
+    }
+  });
+  return matchingSong;
+}
+function playOrPauseSong(songId) {
+  if (currentSongId && currentSongId !== songId) {
+    if (soundMap[currentSongId].playing()) {
+      soundMap[currentSongId].pause();
+    }
+  }
+
+  if (soundMap[songId]) {
+    if (soundMap[songId].playing()) {
+      soundMap[songId].pause();
+    } else {
+      soundMap[songId].play();
+    }
+  } else {
+    songs.forEach(song => {
+      if (song.id === songId) {
+        soundMap[songId] = new Howl({
+          src: song.src,
+          volume: currentVolume,
+        });
+      }
+    });
+
+    if (soundMap[songId]) {
+      soundMap[songId].play();
+    }
+  }
+}
+function playNewSong(newSong) {
+  const volumeDOM = document.querySelector(".volume-range");
+  let volume = parseFloat(volumeDOM.value);
+  currentVolume = volume;
+
+  if (timeInterval) {
+    clearInterval(timeInterval);
+  }
+
+  generatePlayer(newSong);
+  addPlayerEventListeners(newSong.id);
+
+  document.querySelector(".volume-range").addEventListener("input", () => {
+    volume = parseFloat(volumeDOM.value);
+    soundMap[currentSongId].volume(volume);
+    currentVolume = volume;
+    changeAllSongVolume();
+  });
+
+  if (currentSongId && currentSongId !== newSong.id) {
+    if (soundMap[currentSongId].playing()) {
+      soundMap[currentSongId].pause();
+    }
+  }
+
+  playOrPauseSong(newSong.id);
+
+  addDuration(newSong.id);
+  currentSongId = newSong.id;
+
+  soundMap[currentSongId].on("end", () => {
+    const currentIndex = songs.findIndex(song => song.id === currentSongId);
+    console.log(currentIndex);
+    const nextIndex = (currentIndex + 1) % songs.length;
+    const nextSong = songs[nextIndex];
+    playNewSong(nextSong);
+  });
+}
+function addDuration(songId) {
+  const duration = document.querySelector(".song-duration-range");
+  const time = document.querySelector(".current-time");
+  const songTime = document.querySelector(".song-time");
+
+  duration.addEventListener("input", () => {
+    soundMap[songId].seek(duration.value);
+  });
+
+  timeInterval = setInterval(() => {
+    duration.value = String(soundMap[songId].seek());
+    time.innerHTML = Math.round(soundMap[songId].seek() / 60).toFixed(2);
+    duration.setAttribute("max", `${String(soundMap[songId].duration())}`);
+    songTime.innerHTML = (Math.round(soundMap[songId].duration()) / 60).toFixed(
+      2
+    );
+  }, 300);
+}
+function changeAllSongVolume() {
+  for (const songId in soundMap) {
+    soundMap[songId].volume(currentVolume);
+  }
 }
 
+loadAllSongs();
 generateMainSongs();
-generatePlaylistSongs();
-
-
+/* generatePlaylistSongs(); */
 
 document.querySelectorAll(".play-btt").forEach(button => {
   button.addEventListener("click", () => {
     const { songId } = button.dataset;
-    const volumeDOM = document.querySelector(".volume-range");
-    let volume = parseFloat(volumeDOM.value);
-    currentVolume = volume;
-
-    songs.forEach(song => {
-      if (song.id === songId) {
-        matchingSong = song;
-      }
-    });
-
-    if (timeInterval) {
-      clearInterval(timeInterval);
-    }
-
-    generatePlayer(matchingSong);
-
-    const nextBttDOM = document.querySelector('.next-btt');
-    const backBttDOM = document.querySelector('.back-btt');
-
-    nextBttDOM.addEventListener('click', () => {
-      if (currentIndex !== soundMap.length - 1) {
-        soundMap[currentSongId].pause();
-        console.log(soundMap[2]);
-        songIdPlay.play();
-      }
-    })
-    backBttDOM.addEventListener('click', () => {
-      if (currentIndex !== -1) {
-        soundMap[currentSongId].pause();
-        console.log(soundMap[2]);
-        songIdPlay.play();
-      }
-    })
-
-    document.querySelector(".pause-btt").addEventListener("click", () => {
-      const pauseDOM = document.querySelector(".pause-icon");
-      if (soundMap[songId].playing()) {
-        soundMap[songId].pause();
-        pauseDOM.src = "../icons/play_arrow.svg";
-      } else {
-        soundMap[songId].play();
-        pauseDOM.src = "../icons/pause.svg";
-      }
-    });
-
-    document.querySelector(".volume-range").addEventListener("input", () => {
-      volume = parseFloat(volumeDOM.value);
-      soundMap[currentSongId].volume(volume);
-      currentVolume = volume;
-      for (const songId in soundMap) {
-        soundMap[songId].volume(currentVolume);
-      }
-    });
-
-    if (currentSongId && currentSongId !== songId) {
-      if (soundMap[currentSongId].playing()) {
-        soundMap[currentSongId].pause();
-      }
-    }
-
-    if (soundMap[songId]) {
-      if (soundMap[songId].playing()) {
-        soundMap[songId].pause();
-      } else {
-        soundMap[songId].play();
-      }
-    } else {
-      songs.forEach(song => {
-        if (song.id === songId) {
-          soundMap[songId] = new Howl({
-            src: song.src,
-            volume: currentVolume,
-          });
-        }
-      });
-
-      if (soundMap[songId]) {
-        soundMap[songId].play();
-      }
-    }
-    const duration = document.querySelector(".song-duration-range");
-
-    duration.addEventListener("input", () => {
-      soundMap[songId].seek(duration.value);
-    });
-
-    timeInterval = setInterval(() => {
-      duration.value = String(soundMap[songId].seek());
-      duration.setAttribute("max", `${String(soundMap[songId].duration())}`);
-    }, 300);
-    currentSongId = songId;
+    const matchingSong = selectMatchingSong(songId);
+    playNewSong(matchingSong);
   });
 });
-

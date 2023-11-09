@@ -69,4 +69,11 @@ export let songs = [
     title: "Mr. Kill Myself",
     artist: "Sewerslvt",
   },
+  {
+    id: "8kdie-83poki",
+    src: "../music/gunpowder.mp3",
+    img: "https://i.scdn.co/image/ab67616d00001e0272e9475489eb29cb4910fa19",
+    title: "Gunpowder remix",
+    artist: "Wanji",
+  },
 ];
