@@ -1,7 +1,8 @@
 import { songs } from "./data/songs.js";
+import { currentRadioId, radioMap } from "./radiosController.js";
 
-let soundMap = [];
-let currentSongId = null;
+export let soundMap = [];
+export let currentSongId;
 let currentVolume;
 let timeInterval;
 
@@ -142,6 +143,11 @@ export function selectMatchingSong(songs, songId) {
   return matchingSong;
 }
 function playOrPauseSong(songId) {
+  if (currentRadioId && currentRadioId !== songId) {
+    if (radioMap[currentRadioId].playing()) {
+      radioMap[currentRadioId].pause();
+    }
+  }
   if (currentSongId && currentSongId !== songId) {
     if (soundMap[currentSongId].playing()) {
       soundMap[currentSongId].pause();

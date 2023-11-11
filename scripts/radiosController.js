@@ -1,8 +1,13 @@
 import { radios } from "./data/radios.js";
-import { selectMatchingSong, generatePlayer } from "./songsController.js";
+import {
+  soundMap,
+  currentSongId,
+  selectMatchingSong,
+  generatePlayer,
+} from "./songsController.js";
 
-let radioMap = [];
-let currentRadioId;
+export let radioMap = [];
+export let currentRadioId;
 let currentVolume;
 
 export function loadAllRadios() {
@@ -88,6 +93,12 @@ export function addEventListenerRadioPlayBtt() {
   });
 }
 function playOrPauseSong(radioId) {
+  if (currentSongId && currentSongId !== radioId) {
+    if (soundMap[currentSongId].playing()) {
+      soundMap[currentSongId].pause();
+    }
+  }
+
   if (currentRadioId && currentRadioId !== radioId) {
     if (radioMap[currentRadioId].playing()) {
       radioMap[currentRadioId].pause();
