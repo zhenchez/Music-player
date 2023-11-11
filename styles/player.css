@@ -108,6 +108,9 @@
 .show-equalizer {
   display: block;
 }
+.equalizer-canvas {
+  filter: blur(2px) contrast(3);
+}
 .volume-range {
   margin-left: 10px;
   vertical-align: middle;

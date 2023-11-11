@@ -76,4 +76,11 @@ export let songs = [
     title: "Gunpowder remix",
     artist: "Wanji",
   },
+  {
+    id: "akdi3-84ikdf",
+    src: "../music/you-broke-me-first.mp3",
+    img: "https://i.scdn.co/image/ab67616d00001e020c2c97099fd6a637ed0aa4a4",
+    title: "You broke me first",
+    artist: "Tate McRae",
+  },
 ];
