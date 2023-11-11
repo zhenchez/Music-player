@@ -87,6 +87,27 @@
   justify-content: center;
   margin-left: 90px;
 }
+.equalizer-btt {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  position: relative;
+}
+.equalizer-icon {
+  cursor: pointer;
+}
+.equalizer-popup {
+  display: none;
+  position: absolute;
+  background-color: var(--selected-songs-bg);
+  top: -270px;
+  left: -120px;
+  padding: 30px;
+  border-radius: 8px;
+}
+.show-equalizer {
+  display: block;
+}
 .volume-range {
   margin-left: 10px;
   vertical-align: middle;

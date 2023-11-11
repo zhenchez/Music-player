@@ -1,4 +1,9 @@
 import { songs } from "./data/songs.js";
+import {
+  showEqualizer,
+  createEqualizer,
+  createEqualizer1,
+} from "./equalizer.js";
 
 let soundMap = [];
 let currentSongId = null;
@@ -228,22 +233,26 @@ function addDuration(songId) {
     time.innerHTML = formatDuration(soundMap[songId].seek());
     duration.setAttribute("max", `${String(soundMap[songId].duration())}`);
     songTime.innerHTML = formatDuration(soundMap[songId].duration());
-  }, 300);
+  });
 }
 function changeAllSongVolume() {
   for (const songId in soundMap) {
     soundMap[songId].volume(currentVolume);
   }
 }
+function addEventListenerPlayBtt() {
+  document.querySelectorAll(".play-btt").forEach(button => {
+    button.addEventListener("click", () => {
+      const { songId } = button.dataset;
+      const matchingSong = selectMatchingSong(songId);
+      playNewSong(matchingSong);
+    });
+  });
+}
 
 loadAllSongs();
 generateMainSongs();
-/* generatePlaylistSongs(); */
-
-document.querySelectorAll(".play-btt").forEach(button => {
-  button.addEventListener("click", () => {
-    const { songId } = button.dataset;
-    const matchingSong = selectMatchingSong(songId);
-    playNewSong(matchingSong);
-  });
-});
+generatePlaylistSongs();
+addEventListenerPlayBtt();
+createEqualizer1();
+showEqualizer();
