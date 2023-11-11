@@ -8,12 +8,11 @@
   --links: rgba(200, 200, 200, 1);
   --btt-color: rgba(0, 176, 191, 1);
   --details: rgba(160, 160, 160, 1);
-  --equalizer: rgba(0, 176, 191, 1);
 }
 html {
   background-color: var(--background);
   scroll-behavior: smooth;
-  padding-bottom: 2000px;
+  padding-bottom: 200px;
 }
 
 * {

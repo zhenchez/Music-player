@@ -1,37 +1,41 @@
 .main-songs {
-  padding: 10px;
-  background-color: var(--container-bg);
+  padding-right: 10px;
   border-radius: 8px;
 }
 .main-songs-header {
-  margin: 10px;
+  padding: 20px;
 }
-.main-songs-grid {
+.main-songs-grid,
+.main-radios-grid {
   display: grid;
   grid: auto / repeat(6, 1fr);
   padding: 20px;
   background-color: var(--container-bg);
-  margin-top: 20px;
+  margin: 20px 0;
   gap: 20px 20px;
   border-radius: 8px;
 }
 @media (max-width: 1444px) {
-  .main-songs-grid {
+  .main-songs-grid,
+  .main-radios-grid {
     grid: auto / repeat(5, 1fr);
   }
 }
 @media (max-width: 1222px) {
-  .main-songs-grid {
+  .main-songs-grid,
+  .main-radios-grid {
     grid: auto / repeat(4, 1fr);
   }
 }
 @media (max-width: 1050px) {
-  .main-songs-grid {
+  .main-songs-grid,
+  .main-radios-grid {
     grid: auto / repeat(3, 1fr);
   }
 }
 @media (max-width: 891px) {
-  .main-songs-grid {
+  .main-songs-grid,
+  .main-radios-grid {
     grid: auto / repeat(2, 1fr);
   }
 }
