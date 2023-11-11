@@ -5,7 +5,7 @@ export let soundMap = [];
 export let currentSongId;
 let currentVolume;
 let timeInterval;
-let shuffle = true;
+let shuffle;
 
 export function generatePlaylistSongs() {
   const playlistDOM = document.querySelector(".playlist-songs-container");
@@ -63,7 +63,7 @@ export function generateMainSongs() {
     songsDOM.innerHTML = mainSongsHTML;
   });
 }
-export function generatePlayer(song) {
+function generatePlayer(song) {
   const playerRightDOM = document.querySelector(".player-left-section");
   const playerMiddleDOM = document.querySelector(".player-middle-section");
   let bodyHTML = `
@@ -93,7 +93,7 @@ export function generatePlayer(song) {
       </button>
       <button class="player-btt replay-btt">
       <img src="./icons/replay.svg" class="replay-icon player-icon" />
-    </button>
+      </button>
     </div>
     <div class="song-duration">
       <div class="current-time"></div>
@@ -107,11 +107,13 @@ export function loadAllSongs() {
   songs.forEach(song => {
     soundMap[song.id] = new Howl({
       src: song.src,
-      volume: 0.5,
+      volume: 0.3,
     });
   });
 }
 function addPlayerEventListeners(songId) {
+  const shuffleBtt = document.querySelector(".shuffle-btt");
+  const replayBtt = document.querySelector(".replay-btt");
   document.querySelector(".pause-btt").addEventListener("click", () => {
     const pauseDOM = document.querySelector(".pause-icon");
     if (soundMap[songId].playing()) {
@@ -137,12 +139,35 @@ function addPlayerEventListeners(songId) {
   });
   document.querySelector(".shuffle-btt").addEventListener("click", () => {
     shuffle = true;
-    console.log("shuffle");
+    if (replayBtt.classList.contains("active-btt")) {
+      replayBtt.classList.remove("active-btt");
+      shuffleBtt.classList.add("active-btt");
+    } else {
+      shuffleBtt.classList.add("active-btt");
+    }
+    soundMap[currentSongId].off("end");
+    soundMap[currentSongId].on("end", shuffleSongs);
   });
   document.querySelector(".replay-btt").addEventListener("click", () => {
     shuffle = false;
-    console.log("replay");
+    if (shuffleBtt.classList.contains("active-btt")) {
+      shuffleBtt.classList.remove("active-btt");
+      replayBtt.classList.add("active-btt");
+    } else {
+      replayBtt.classList.add("active-btt");
+    }
+    soundMap[currentSongId].off("end");
+    soundMap[currentSongId].on("end", replayCurrentSong);
   });
+}
+function shuffleSongs() {
+  const currentIndex = songs.findIndex(song => song.id === currentSongId);
+  const nextIndex = (currentIndex + 1) % songs.length;
+  const nextSong = songs[nextIndex];
+  playNewSong(nextSong);
+}
+function replayCurrentSong() {
+  soundMap[currentSongId].play();
 }
 export function selectMatchingSong(songs, songId) {
   let matchingSong;
@@ -216,12 +241,9 @@ function playNewSong(newSong) {
   addDuration(newSong.id);
   currentSongId = newSong.id;
 
-  soundMap[currentSongId].on("end", () => {
-    const currentIndex = songs.findIndex(song => song.id === currentSongId);
-    const nextIndex = (currentIndex + 1) % songs.length;
-    const nextSong = songs[nextIndex];
-    playNewSong(nextSong);
-  });
+  if (shuffle) {
+    soundMap[currentSongId].on("end", shuffleSongs);
+  }
 }
 function formatDuration(s) {
   const minutes = Math.floor(s / 60);

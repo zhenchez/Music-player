@@ -54,6 +54,9 @@
   flex-shrink: 0;
 }
 .player-btt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border: none;
   margin: 4px 10px;
@@ -67,6 +70,14 @@
   width: 40px;
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
+}
+.shuffle-icon,
+.replay-icon {
+  width: 18px;
+}
+.active-btt {
+  background-color: var(--active-color);
+  border-radius: 4px;
 }
 .song-duration {
   display: flex;

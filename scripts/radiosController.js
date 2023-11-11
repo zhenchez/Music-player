@@ -3,7 +3,6 @@ import {
   soundMap,
   currentSongId,
   selectMatchingSong,
-  generatePlayer,
 } from "./songsController.js";
 
 export let radioMap = [];
@@ -19,6 +18,40 @@ export function loadAllRadios() {
       format: ["aac"],
     });
   });
+}
+function generatePlayer(song) {
+  const playerRightDOM = document.querySelector(".player-left-section");
+  const playerMiddleDOM = document.querySelector(".player-middle-section");
+  let bodyHTML = `
+    <div class="player-song-thumbnail">
+      <img class="player-song-img" src=${song.img} />
+    </div>
+    <div class="player-song-details">
+      <p class="player-song-title">${song.title}</p>
+      <p class="player-song-artist">${song.artist}</p>
+    </div>
+  `;
+  playerRightDOM.innerHTML = bodyHTML;
+
+  bodyHTML = `
+    <div class="player-btts">
+      <button class="player-btt back-btt">
+        <img src="./icons/back.svg" class="back-icon player-icon" />
+      </button>
+      <button class="player-btt pause-btt">
+        <img src="./icons/pause.svg" class="pause-icon player-icon" />
+      </button>
+      <button class="player-btt next-btt">
+        <img src="./icons/next.svg" class="next-icon player-icon" />
+      </button>
+    </div>
+    <div class="song-duration">
+      <div class="current-time"></div>
+      <input class="song-duration-range" type="range" value="0" step="0.01"/>
+      <div class="song-time"></div>
+    </div>
+  `;
+  playerMiddleDOM.innerHTML = bodyHTML;
 }
 export function generateMainRadios() {
   const radioDOM = document.querySelector(".main-radios-grid");
@@ -57,6 +90,19 @@ function addPlayerEventListeners(songId) {
       radioMap[songId].play();
       pauseDOM.src = "../icons/pause.svg";
     }
+  });
+  document.querySelector(".back-btt").addEventListener("click", () => {
+    const currentIndex = radios.findIndex(radio => radio.id === currentRadioId);
+    const previousIndex = (currentIndex - 1 + radios.length) % radios.length;
+    const previousRadio = radios[previousIndex];
+    playNewRadio(previousRadio);
+  });
+
+  document.querySelector(".next-btt").addEventListener("click", () => {
+    const currentIndex = radios.findIndex(radio => radio.id === currentRadioId);
+    const nextIndex = (currentIndex + 1) % radios.length;
+    const nextRadio = radios[nextIndex];
+    playNewRadio(nextRadio);
   });
 }
 function playNewRadio(newRadio) {

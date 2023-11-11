@@ -8,6 +8,7 @@
   --selected-songs-bg: rgba(50, 50, 50, 0.7);
   --links: rgba(200, 200, 200, 1);
   --btt-color: rgba(0, 176, 191, 1);
+  --active-color: rgba(0, 176, 191, 0.7);
   --details: rgba(160, 160, 160, 1);
 }
 html {
