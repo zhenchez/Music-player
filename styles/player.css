@@ -7,7 +7,7 @@
   left: 380px;
   right: 50px;
   padding: 20px;
-  background-color: var(--container-bg);
+  background-color: var(--player-bg);
   border-radius: 8px;
   z-index: 100;
 }

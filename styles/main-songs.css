@@ -11,7 +11,7 @@
   grid: auto / repeat(6, 1fr);
   padding: 20px;
   background-color: var(--container-bg);
-  margin: 20px 0;
+  margin: 10px 0;
   gap: 20px 20px;
   border-radius: 8px;
 }

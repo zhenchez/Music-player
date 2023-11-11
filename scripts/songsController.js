@@ -5,6 +5,7 @@ export let soundMap = [];
 export let currentSongId;
 let currentVolume;
 let timeInterval;
+let shuffle = true;
 
 export function generatePlaylistSongs() {
   const playlistDOM = document.querySelector(".playlist-songs-container");
@@ -78,6 +79,9 @@ export function generatePlayer(song) {
 
   bodyHTML = `
     <div class="player-btts">
+      <button class="player-btt shuffle-btt">
+        <img src="./icons/shuffle.svg" class="shuffle-icon player-icon" />
+      </button>
       <button class="player-btt back-btt">
         <img src="./icons/back.svg" class="back-icon player-icon" />
       </button>
@@ -87,6 +91,9 @@ export function generatePlayer(song) {
       <button class="player-btt next-btt">
         <img src="./icons/next.svg" class="next-icon player-icon" />
       </button>
+      <button class="player-btt replay-btt">
+      <img src="./icons/replay.svg" class="replay-icon player-icon" />
+    </button>
     </div>
     <div class="song-duration">
       <div class="current-time"></div>
@@ -95,8 +102,6 @@ export function generatePlayer(song) {
     </div>
   `;
   playerMiddleDOM.innerHTML = bodyHTML;
-
-  addPreviousNextListener();
 }
 export function loadAllSongs() {
   songs.forEach(song => {
@@ -106,7 +111,17 @@ export function loadAllSongs() {
     });
   });
 }
-function addPreviousNextListener() {
+function addPlayerEventListeners(songId) {
+  document.querySelector(".pause-btt").addEventListener("click", () => {
+    const pauseDOM = document.querySelector(".pause-icon");
+    if (soundMap[songId].playing()) {
+      soundMap[songId].pause();
+      pauseDOM.src = "../icons/play_arrow.svg";
+    } else {
+      soundMap[songId].play();
+      pauseDOM.src = "../icons/pause.svg";
+    }
+  });
   document.querySelector(".back-btt").addEventListener("click", () => {
     const currentIndex = songs.findIndex(song => song.id === currentSongId);
     const previousIndex = (currentIndex - 1 + songs.length) % songs.length;
@@ -120,17 +135,13 @@ function addPreviousNextListener() {
     const nextSong = songs[nextIndex];
     playNewSong(nextSong);
   });
-}
-function addPlayerEventListeners(songId) {
-  document.querySelector(".pause-btt").addEventListener("click", () => {
-    const pauseDOM = document.querySelector(".pause-icon");
-    if (soundMap[songId].playing()) {
-      soundMap[songId].pause();
-      pauseDOM.src = "../icons/play_arrow.svg";
-    } else {
-      soundMap[songId].play();
-      pauseDOM.src = "../icons/pause.svg";
-    }
+  document.querySelector(".shuffle-btt").addEventListener("click", () => {
+    shuffle = true;
+    console.log("shuffle");
+  });
+  document.querySelector(".replay-btt").addEventListener("click", () => {
+    shuffle = false;
+    console.log("replay");
   });
 }
 export function selectMatchingSong(songs, songId) {
@@ -207,7 +218,6 @@ function playNewSong(newSong) {
 
   soundMap[currentSongId].on("end", () => {
     const currentIndex = songs.findIndex(song => song.id === currentSongId);
-    console.log(currentIndex);
     const nextIndex = (currentIndex + 1) % songs.length;
     const nextSong = songs[nextIndex];
     playNewSong(nextSong);

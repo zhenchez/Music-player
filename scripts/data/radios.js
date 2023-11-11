@@ -37,7 +37,7 @@ export let radios = [
   {
     id: "ike893k",
     src: "https://media-ice.musicradio.com/ClassicFMMP3",
-    img: "./img/thumbnails/radios/ab67706c0000da84d3f1527b364024f8a388939b.jpg",
+    img: "./img/thumbnails/radios/ab67706c0000da84fe081ef71463387820b82700.jpg",
     title: "ClassicFM",
     artist: "España",
   },

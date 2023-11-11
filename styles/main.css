@@ -3,6 +3,7 @@
 :root {
   --background: rgb(0, 0, 0, 1);
   --container-bg: rgba(18, 18, 18, 1);
+  --player-bg: rgba(7, 7, 7, 1);
   --songs-bg: rgba(50, 50, 50, 0.5);
   --selected-songs-bg: rgba(50, 50, 50, 0.7);
   --links: rgba(200, 200, 200, 1);

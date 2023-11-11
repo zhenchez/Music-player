@@ -83,4 +83,11 @@ export let songs = [
     title: "You broke me first",
     artist: "Tate McRae",
   },
+  {
+    id: "asdf38-kgi4e",
+    src: "../music/greedy.mp3",
+    img: "./img/thumbnails/songs/ab67616d00001e0221d586ad830dd93b2703b139.jpg",
+    title: "Greedy (cassö remix)",
+    artist: "Tate McRae",
+  },
 ];
