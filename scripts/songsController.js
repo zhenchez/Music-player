@@ -6,7 +6,7 @@ export let currentSongId;
 let currentVolume;
 let timeInterval;
 let shuffle;
-let muted;
+let muted = false;
 
 export function generatePlaylistSongs() {
   const playlistDOM = document.querySelector(".playlist-songs-container");

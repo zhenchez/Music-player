@@ -8,6 +8,7 @@ import {
 export let radioMap = [];
 export let currentRadioId;
 let currentVolume;
+let muted = false;
 
 export function loadAllRadios() {
   radios.forEach(radio => {
