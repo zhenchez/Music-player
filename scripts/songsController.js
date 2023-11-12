@@ -6,6 +6,7 @@ export let currentSongId;
 let currentVolume;
 let timeInterval;
 let shuffle;
+let muted;
 
 export function generatePlaylistSongs() {
   const playlistDOM = document.querySelector(".playlist-songs-container");
@@ -109,6 +110,41 @@ export function loadAllSongs() {
       src: song.src,
       volume: 0.3,
     });
+  });
+}
+export function addEventListenerVolume() {
+  const volumeIcon = document.querySelector(".volume-icon");
+  const volumeDOM = document.querySelector(".volume-range");
+  document.querySelector(".volume-range").addEventListener("input", () => {
+    let volume = parseFloat(volumeDOM.value);
+    if (soundMap[currentSongId]) {
+      soundMap[currentSongId].volume(volume);
+    }
+    currentVolume = volume;
+    if (currentVolume === 0) {
+      volumeIcon.src = "./icons/mute.svg";
+      muted = true;
+    } else if (currentVolume <= 0.3 && currentVolume > 0) {
+      volumeIcon.src = "./icons/volume_down.svg";
+    } else {
+      volumeIcon.src = "./icons/volume.svg";
+    }
+    changeAllSongVolume();
+  });
+  document.querySelector(".volume-btt").addEventListener("click", () => {
+    if (muted) {
+      volumeDOM.value = 0.3;
+      currentVolume = 0.3;
+      changeAllSongVolume();
+      volumeIcon.src = "./icons/volume.svg";
+      muted = false;
+    } else {
+      volumeDOM.value = 0;
+      currentVolume = 0;
+      changeAllSongVolume();
+      volumeIcon.src = "./icons/mute.svg";
+      muted = true;
+    }
   });
 }
 function addPlayerEventListeners(songId) {
@@ -222,13 +258,6 @@ function playNewSong(newSong) {
 
   generatePlayer(newSong);
   addPlayerEventListeners(newSong.id);
-
-  document.querySelector(".volume-range").addEventListener("input", () => {
-    volume = parseFloat(volumeDOM.value);
-    soundMap[currentSongId].volume(volume);
-    currentVolume = volume;
-    changeAllSongVolume();
-  });
 
   if (currentSongId && currentSongId !== newSong.id) {
     if (soundMap[currentSongId].playing()) {

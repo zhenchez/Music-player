@@ -105,20 +105,49 @@ function addPlayerEventListeners(songId) {
     playNewRadio(nextRadio);
   });
 }
-function playNewRadio(newRadio) {
+export function addEventListenerVolumeRadio() {
+  const volumeIcon = document.querySelector(".volume-icon");
   const volumeDOM = document.querySelector(".volume-range");
-  let volume = parseFloat(volumeDOM.value);
-  currentVolume = volume;
-
+  document.querySelector(".volume-range").addEventListener("input", () => {
+    let volume = parseFloat(volumeDOM.value);
+    if (radioMap[currentRadioId]) {
+      radioMap[currentRadioId].volume(volume);
+    }
+    currentVolume = volume;
+    if (currentVolume === 0) {
+      volumeIcon.src = "./icons/mute.svg";
+      muted = true;
+    } else if (currentVolume <= 0.3 && currentVolume > 0) {
+      volumeIcon.src = "./icons/volume_down.svg";
+    } else {
+      volumeIcon.src = "./icons/volume.svg";
+    }
+    changeAllRadioVolume();
+  });
+  document.querySelector(".volume-btt").addEventListener("click", () => {
+    if (muted) {
+      volumeDOM.value = 0.3;
+      currentVolume = 0.3;
+      changeAllRadioVolume();
+      volumeIcon.src = "./icons/volume.svg";
+      muted = false;
+    } else {
+      volumeDOM.value = 0;
+      currentVolume = 0;
+      changeAllRadioVolume();
+      volumeIcon.src = "./icons/mute.svg";
+      muted = true;
+    }
+  });
+}
+function changeAllRadioVolume() {
+  for (const radioId in radioMap) {
+    radioMap[radioId].volume(currentVolume);
+  }
+}
+function playNewRadio(newRadio) {
   generatePlayer(newRadio);
   addPlayerEventListeners(newRadio.id);
-
-  document.querySelector(".volume-range").addEventListener("input", () => {
-    volume = parseFloat(volumeDOM.value);
-    radioMap[currentRadioId].volume(volume);
-    currentVolume = volume;
-    changeAllSongVolume();
-  });
 
   if (currentRadioId && currentRadioId !== newRadio.id) {
     if (radioMap[currentRadioId].playing()) {

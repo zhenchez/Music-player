@@ -122,6 +122,12 @@
 .equalizer-canvas {
   filter: blur(2px) contrast(3);
 }
+.volume-btt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 .volume-range {
   margin-left: 10px;
   vertical-align: middle;
