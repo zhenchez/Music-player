@@ -44,7 +44,7 @@ button {
   padding-left: 320px;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1281px) {
   .left-section {
     display: none;
   }

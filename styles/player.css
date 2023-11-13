@@ -11,11 +11,6 @@
   border-radius: 8px;
   z-index: 100;
 }
-@media (max-width: 1050px) {
-  .player-container {
-    left: 50px;
-  }
-}
 .player-left-section {
   display: flex;
   align-items: center;
@@ -144,4 +139,31 @@
 .current-time,
 .song-time {
   letter-spacing: 1px;
+}
+@media (max-width: 1281px) {
+  .player-container {
+    left: 50px;
+  }
+}
+@media (max-width: 952px) {
+  .player-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .player-left-section {
+    margin-right: 0px;
+  }
+  .player-song-details {
+    margin-left: 10px;
+  }
+  .player-song-title {
+    margin-bottom: 10px;
+    -webkit-line-clamp: 1;
+  }
+  .player-middle-section {
+    margin: 30px 0;
+  }
+  .player-right-section {
+    margin-left: -50px;
+  }
 }

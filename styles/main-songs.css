@@ -48,7 +48,7 @@
     grid: auto / repeat(3, 1fr);
   }
 }
-@media (max-width: 891px) {
+@media (max-width: 730px) {
   .main-songs-grid,
   .main-radios-grid {
     grid: auto / repeat(2, 1fr);
