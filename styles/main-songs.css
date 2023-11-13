@@ -3,7 +3,22 @@
   border-radius: 8px;
 }
 .main-songs-header {
+  display: flex;
+  align-items: center;
   padding: 20px;
+}
+.main-songs-header h1 {
+  margin-right: 100px;
+}
+.main-songs-header input {
+  font-family: "Roboto", Arial;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  max-width: 500px;
+  flex: 1;
+  background-color: var(--songs-bg);
+  border: none;
+  border-radius: 8px;
 }
 .main-songs-grid,
 .main-radios-grid {
