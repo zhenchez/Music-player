@@ -43,3 +43,12 @@ button {
   padding-top: 8px;
   padding-left: 320px;
 }
+
+@media (max-width: 1050px) {
+  .left-section {
+    display: none;
+  }
+  .right-section {
+    padding-left: 10px;
+  }
+}

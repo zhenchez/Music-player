@@ -11,6 +11,11 @@
   border-radius: 8px;
   z-index: 100;
 }
+@media (max-width: 1050px) {
+  .player-container {
+    left: 50px;
+  }
+}
 .player-left-section {
   display: flex;
   align-items: center;
