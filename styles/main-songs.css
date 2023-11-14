@@ -23,12 +23,18 @@
 .main-songs-grid,
 .main-radios-grid {
   display: grid;
-  grid: auto / repeat(6, 1fr);
+  grid: auto / repeat(7, 1fr);
   padding: 20px;
   background-color: var(--container-bg);
   margin: 10px 0;
   gap: 20px 20px;
   border-radius: 8px;
+}
+@media (max-width: 1600px) {
+  .main-songs-grid,
+  .main-radios-grid {
+    grid: auto / repeat(6, 1fr);
+  }
 }
 @media (max-width: 1444px) {
   .main-songs-grid,
