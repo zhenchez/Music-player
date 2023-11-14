@@ -23,7 +23,7 @@
 .main-songs-grid,
 .main-radios-grid {
   display: grid;
-  grid: auto / repeat(6, 1fr);
+  grid: auto / repeat(7, 1fr);
   padding: 20px;
   background-color: var(--container-bg);
   margin: 10px 0;
