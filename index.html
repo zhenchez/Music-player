@@ -21,7 +21,7 @@
           </div>
 
           <div class="header-links">
-            <a href="#main-songs-header" class="links"
+            <a href="#search-bar" class="links"
               ><img class="icons" src="./icons/home.svg" />Home</a
             >
             <a href="" class="links"
@@ -45,12 +45,35 @@
 
       <div class="right-section">
         <div class="main-songs">
+          <div class="main-header">
+            <div id="search-bar" class="search-bar">
+              <input
+                class="search-bar-input"
+                type="text"
+                placeholder="Search"
+              />
+              <button class="clear-search-bar">
+                <img src="./icons/x.svg" />
+              </button>
+              <button class="search-bar-btt">
+                <img class="search-bar-icon" src="./icons/search.svg" />
+              </button>
+            </div>
+            <div class="main-header-btt">
+              <a class="login" href="#">Log In</a>
+            </div>
+          </div>
           <div id="main-songs-header" class="main-songs-header">
-            <h1>Songs</h1>
-            <input type="text" placeholder="Search" />
+            <h1>Featured Songs</h1>
           </div>
 
           <div class="main-songs-grid"></div>
+
+          <div id="main-artist-header" class="main-songs-header">
+            <h1>Featured Artists</h1>
+          </div>
+
+          <div class="main-artists-grid"></div>
 
           <div id="main-radio-header" class="main-songs-header">
             <h1>Radios</h1>

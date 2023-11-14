@@ -54,32 +54,35 @@ function generatePlayer(song) {
   `;
   playerMiddleDOM.innerHTML = bodyHTML;
 }
-export function generateMainRadios() {
+export function generateMainRadios(items) {
   const radioDOM = document.querySelector(".main-radios-grid");
-  let mainSongsHTML = "";
-  radios.forEach(radio => {
-    let bodyHTML = "";
-    bodyHTML = `
-    <div class="main-songs-song">
-      <div class="main-thumbnail-container">
-        <img
-          class="main-thumbnail-img"
-          src=${radio.img}
-        />
-        <button class="main-song-play-btt play-btt main-play-btt-${radio.id}" data-song-id="${radio.id}">
-          <img class="main-song-play-icon main-play-icon-${radio.id}" src="./icons/play_arrow.svg" />
-        </button>
+  radioDOM.innerHTML = "";
+  if (items.length > 0) {
+    let mainSongsHTML = "";
+    items.forEach(item => {
+      let bodyHTML = "";
+      bodyHTML = `
+      <div class="main-songs-song">
+        <div class="main-thumbnail-container">
+          <img
+            class="main-thumbnail-img"
+            src=${item.img}
+          />
+          <button class="main-song-play-btt play-btt main-play-btt-${item.id}" data-song-id="${item.id}">
+            <img class="main-song-play-icon main-play-icon-${item.id}" src="./icons/play_arrow.svg" />
+          </button>
+        </div>
+  
+        <div class="main-song-details">
+          <p class="main-song-title">${item.title}</p>
+          <p class="main-song-artist">${item.artist}</p>
+        </div>
       </div>
-
-      <div class="main-song-details">
-        <p class="main-song-title">${radio.title}</p>
-        <p class="main-song-artist">${radio.artist}</p>
-      </div>
-    </div>
-    `;
-    mainSongsHTML += bodyHTML;
-    radioDOM.innerHTML = mainSongsHTML;
-  });
+      `;
+      mainSongsHTML += bodyHTML;
+      radioDOM.innerHTML = mainSongsHTML;
+    });
+  }
 }
 function addPlayerEventListeners(songId) {
   document.querySelector(".pause-btt").addEventListener("click", () => {

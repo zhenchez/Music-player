@@ -7,23 +7,24 @@
 }
 .playlist-song {
   display: flex;
+  align-items: center;
   margin-bottom: 16px;
 }
 .playlist-img-container {
   width: 40px;
   height: 40px;
-  margin-right: 6px;
+  margin-right: 20px;
   cursor: pointer;
 }
 .playlist-thumbnail {
   width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
 .playlist-song-details {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 160px;
-  margin-right: 16px;
 }
 .playlist-song-title {
   font-size: 16px;
@@ -34,25 +35,9 @@
   -webkit-box-orient: vertical;
   cursor: pointer;
 }
-.playlist-song-artist {
-  font-size: 12px;
-  cursor: pointer;
-  color: var(--details);
-}
-.playlist-play-btt-container {
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
 .playlist-play-btt {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--btt-color);
-  height: 35px;
-  width: 35px;
+  background-color: transparent;
   border: none;
-  border-radius: 50%;
   transition: transform 0.3s;
 }
 .playlist-play-btt:hover {
