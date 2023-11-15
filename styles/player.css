@@ -120,7 +120,7 @@
   display: block;
 }
 .equalizer-canvas {
-  filter: contrast(3);
+  filter: contrast(4);
 }
 .volume-btt {
   display: flex;

@@ -29,7 +29,7 @@ export function createEqualizer() {
       ctx.save();
       ctx.translate(canvas.width / 2, canvas.height / 2);
       ctx.rotate(i + (Math.PI * 2) / bufferLength);
-      const hue = i;
+      const hue = i * 1.2;
       ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
       ctx.fillRect(0, 0, barWidth, barHeight);
       x += barHeight;
