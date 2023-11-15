@@ -41,4 +41,11 @@ export let radios = [
     title: "ClassicFM",
     artist: "España",
   },
+  {
+    id: "3498kdf",
+    src: "https://stream.bigfm.de/ushiphop/mp3-128",
+    img: "../../img/thumbnails/radios/ab67706c0000da84a2dcef932ec7dada463d3ff1.jpg",
+    title: "BigFM",
+    artist: "EEUU",
+  },
 ];

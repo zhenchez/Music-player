@@ -27,6 +27,7 @@
   width: 160px;
 }
 .playlist-song-title {
+  color: var(--links);
   font-size: 16px;
   cursor: pointer;
   overflow: hidden;
@@ -34,6 +35,10 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   cursor: pointer;
+  transition: color 0.3s;
+}
+.playlist-song-title:hover {
+  color: #fff;
 }
 .playlist-play-btt {
   background-color: transparent;

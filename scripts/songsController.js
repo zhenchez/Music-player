@@ -57,8 +57,8 @@ export function generateMainSongs(items) {
         </div>
   
         <div class="main-song-details">
-          <p class="main-song-title">${item.title}</p>
-          <p class="main-song-artist">${item.artist}</p>
+          <p class="main-song-title" title="${item.title}">${item.title}</p>
+          <p class="main-song-artist" title="${item.artist}">${item.artist}</p>
         </div>
       </div>
       `;

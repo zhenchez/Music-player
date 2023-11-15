@@ -26,9 +26,11 @@
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   width: 0%;
+  transition: outline 0s, box-shadow 0.15s;
 }
 .search-bar input:focus {
   outline: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 1) inset;
 }
 .search-bar-btt {
   background-color: var(--songs-bg);
@@ -36,6 +38,10 @@
   border-bottom-right-radius: 20px;
   border: 1px solid var(--selected-songs-bg);
   padding: 6px 10px;
+  transition: background-color 0.15s;
+}
+.search-bar-btt:hover {
+  background-color: var(--container-bg);
 }
 .clear-search-bar {
   position: absolute;
@@ -121,10 +127,10 @@
   position: relative;
   margin-bottom: 10px;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .main-thumbnail-img {
   width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .main-artist-thumbnail-img {
   width: 100%;
@@ -168,6 +174,10 @@
 }
 .main-song-artist {
   font-size: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   color: var(--details);
   cursor: pointer;
 }
