@@ -127,7 +127,7 @@ export let songs = [
   },
   {
     id: "kdgig0-ej73",
-    src: "../../music/House-parti.mp3",
+    src: "../../music/House-party.mp3",
     img: "../../img/thumbnails/songs/ab67616d00001e02b7a94e641d89c76908d0ade1.jpg",
     title: "House party",
     artist: "BSNO",
