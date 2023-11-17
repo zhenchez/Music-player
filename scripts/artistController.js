@@ -6,7 +6,7 @@ export function generateArtistsHTML(items) {
     items.forEach(item => {
       let bodyHTML = "";
       bodyHTML = `
-      <div class="main-songs-song">
+      <div class="main-songs-song" data-main-artist-id="${item.id}">
         <div class="main-artist-thumbnail-container">
           <img
             class="main-artist-thumbnail-img"

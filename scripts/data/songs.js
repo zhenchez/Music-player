@@ -127,10 +127,10 @@ export let songs = [
   },
   {
     id: "kdgig0-ej73",
-    src: "../../music/House-party.mp3",
-    img: "../../img/thumbnails/songs/ab67616d00001e02b7a94e641d89c76908d0ade1.jpg",
-    title: "House party",
-    artist: "BSNO",
+    src: "../../music/lalala.mp3",
+    img: "../../img/thumbnails/songs/ab67616d00001e02b1f828e0312a665efa684c72.jpg",
+    title: "Around the world",
+    artist: "Fyex",
   },
   {
     id: "8349kdf-dke83",
