@@ -1,0 +1,32 @@
+.artist-page-main {
+  margin-bottom: 100px;
+}
+.artist-page-img-container {
+  position: relative;
+}
+.artist-page-big-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px 8px 0 0;
+  border: 2px solid #fff;
+}
+.artist-page-img {
+  position: absolute;
+  width: 200px;
+  border-radius: 50%;
+  bottom: -60px;
+  left: 30px;
+  border: 2px solid #fff;
+}
+.artist-page-header {
+  position: absolute;
+  left: 240px;
+}
+.artist-page-featured-songs {
+  margin: 20px;
+}
+.main-artist-page-grid {
+  background-color: transparent;
+}

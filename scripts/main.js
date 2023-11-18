@@ -12,7 +12,10 @@ import {
   addEventListenerRadioPlayBtt,
   addEventListenerVolumeRadio,
 } from "./radiosController.js";
-import { generateArtistsHTML } from "./artistController.js";
+import {
+  generateArtistsHTML,
+  addEventListenerArtists,
+} from "./artistController.js";
 import { songs } from "./data/songs.js";
 import { artists } from "./data/artists.js";
 import { radios } from "./data/radios.js";
@@ -38,6 +41,7 @@ function generateEq() {
 // Artist
 function generateArtists(item) {
   generateArtistsHTML(item);
+  addEventListenerArtists(item, songs);
 }
 
 // Radios
@@ -98,7 +102,7 @@ document.querySelector(".clear-search-bar").addEventListener("click", () => {
 
 loadAllSongs();
 loadAllRadios();
+generateArtists(artists);
 generateSongs(songs);
 generateEq();
-generateArtists(artists);
 generateRadios(radios);
