@@ -41,6 +41,7 @@ function generateEq() {
 // Artist
 function generateArtists(item) {
   generateArtistsHTML(item);
+  addEventListenerPlayBtt();
   addEventListenerArtists(item, songs);
 }
 
@@ -62,6 +63,14 @@ function toggleVisibility(filteredData, headerSelector, gridSelector) {
     header.classList.remove("hiden");
     grid.classList.remove("hiden");
   }
+}
+
+export function loadAll() {
+  loadAllSongs();
+  loadAllRadios();
+  generateSongs(songs);
+  generateArtists(artists);
+  generateRadios(radios);
 }
 
 function handleSearchBar() {
@@ -100,9 +109,5 @@ document.querySelector(".clear-search-bar").addEventListener("click", () => {
   handleSearchBar();
 });
 
-loadAllSongs();
-loadAllRadios();
-generateArtists(artists);
-generateSongs(songs);
+loadAll();
 generateEq();
-generateRadios(radios);

@@ -15,10 +15,10 @@ export let radios = [
   },
   {
     id: "kdie93",
-    src: "https://bbkissfm.kissfmradio.cires21.com/bbkissfm.mp3?wmsAuthSign=c2VydmVyX3RpbWU9MTEvMTEvMjAyMyAwNToxNzoxMCBQTSZoYXNoX3ZhbHVlPVphaG14OUVPMldiUU9SYnJFRW9meXc9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD0xODk5Mjg3ODQ=",
-    img: "../../img/thumbnails/radios/ab67706c0000da8449aa966a890a62957d87bc50.jpg",
-    title: "KissFM",
-    artist: "España",
+    src: "https://25703.live.streamtheworld.com/MEGA_HITS.mp3",
+    img: "../../img/thumbnails/radios/ab67706c0000da84e89b7cdb0e41994312fa03d0.jpg",
+    title: "Mega Hits",
+    artist: "Portugal",
   },
   {
     id: "kjas234",

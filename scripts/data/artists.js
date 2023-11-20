@@ -12,7 +12,7 @@ export let artists = [
     name: "Raik",
     img: "../../img/profiles/ab6761610000517417036a4bb4dd48f7c52f80f0.jpg",
     bigImg:
-      "../../img/profiles/big-img/ab6761610000517417036a4bb4dd48f7c52f80f0.jpg",
+      "../../img/profiles/big-img/ab6761700000c52c6071c1a54fc3dfd6bb9eb776.jfif",
     genre: "Techno",
   },
   {

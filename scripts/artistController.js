@@ -1,3 +1,14 @@
+import {
+  addEventListenerPlayBtt,
+  addEventListenerVolume,
+} from "./songsController.js";
+import {
+  addEventListenerRadioPlayBtt,
+  addEventListenerVolumeRadio,
+} from "./radiosController.js";
+import { artists } from "./data/artists.js";
+let mainPageHTML;
+
 export function generateArtistsHTML(items) {
   const artistsDOM = document.querySelector(".main-artists-grid");
   artistsDOM.innerHTML = "";
@@ -35,7 +46,13 @@ function generateArtistPageHTML(matchingArtist, songs) {
   );
   let mainSongsHTML = "";
   let bodyHTML = "";
+  mainPageHTML = main.innerHTML;
   bodyHTML = `
+      <div class="artist-back-btt-container">
+        <button class="artist-back-btt">
+          <img class="arrow-back-icon" src="./icons/arrow_back.svg"/>
+        </button>
+      </div>
       <div class="artist-page-main">
         <div class="artist-page-img-container">
           <img class="artist-page-big-img" src="${matchingArtist.bigImg}" />
@@ -93,7 +110,20 @@ export function addEventListenerArtists(artists, songs) {
           matchingArtist = item;
         }
       });
+      window.scrollTo({ top: 100 });
       generateArtistPageHTML(matchingArtist, songs);
+      addEventListenerPlayBtt();
+
+      document
+        .querySelector(".artist-back-btt")
+        .addEventListener("click", () => {
+          document.querySelector(".main").innerHTML = mainPageHTML;
+          addEventListenerPlayBtt();
+          addEventListenerVolume();
+          addEventListenerRadioPlayBtt();
+          addEventListenerVolumeRadio();
+          addEventListenerArtists(artists, songs);
+        });
     });
   });
 }

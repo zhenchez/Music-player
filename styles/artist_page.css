@@ -1,3 +1,23 @@
+.artist-back-btt-container {
+  margin: 10px 20px;
+}
+.artist-back-btt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--songs-bg);
+  border-radius: 50%;
+  border: none;
+  transition: transform 0.15s;
+}
+.artist-back-btt:hover {
+  transform: scale(1.1);
+}
+.arrow-back-icon {
+  width: 22px;
+}
 .artist-page-main {
   margin-bottom: 100px;
 }
